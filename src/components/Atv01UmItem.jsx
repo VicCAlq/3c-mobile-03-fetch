@@ -22,3 +22,22 @@
   * O valor de "status" deve ser "feito" se completed for true, 
   * ou "a fazer" se completed for false
   */
+
+
+import { View, Pressable, Text } from 'react-native'
+import { useState } from 'react'
+
+export default function Atv01UmItem({}){
+  const [resposta, setResposta] = useState(null)
+
+
+  
+  return(
+    <View>
+      <Pressable>
+        Clique abaixo para carregar uma atividade
+      </Pressable>
+      {resposta}
+    </View>
+  )
+}
