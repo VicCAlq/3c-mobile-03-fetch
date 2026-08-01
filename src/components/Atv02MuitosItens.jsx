@@ -23,3 +23,45 @@
   * O valor de "status" deve ser "feito" se completed for true, 
   * ou "a fazer" se completed for false
   */
+import { useState } from "react";
+import { Pressable, View, Text } from "react-native";
+
+
+export default function Atv02MuitosItens()
+{
+const [itens,setItens] = useState()
+
+async function carregarItens() {
+  await fetch('https://jsonplaceholder.typicode.com/todos',{method:'GET',})
+  .then(resposta => {return resposta.json()})
+  .then(itens => {
+    const listaDeItens = <View>
+      {itens.map((conteudo)=>{
+        let status;
+        if (conteudo.completed === true)
+        {
+          status = "feito" 
+        }
+
+        else {
+          status = "a fazer"
+        }
+
+        return <View>
+          <Text>{conteudo.id} - {conteudo.title}: {status}</Text>
+        </View> 
+      })}
+    </View>
+    setItens(listaDeItens)
+  })
+}
+
+return(
+  <View>
+    <Pressable onPress={() => carregarItens()}>
+      <Text>Clique abaixo para carregar várias atividades</Text>
+    </Pressable>
+    {itens}
+  </View>
+)
+}

@@ -28,3 +28,44 @@
   * Os colchetes indicam que deve se tratar de uma variável, e não
   * do texto dentro deles.
   */
+import { useState } from "react";
+import { Pressable, View, Text } from "react-native";
+
+
+export default function Atv04TratarErrosDeMuitos()
+{
+const [itens,setItens] = useState()
+
+async function carregarItens() {
+  await fetch('https://jsonplaceholder.typicode.com/comments',{method:'GET',})
+  .then(resposta => {
+    if(!resposta.ok)
+    {
+      throw new Error(`Deu erro, Status : ${resposta.status}`);
+    }
+    return resposta.json()})
+  .then(itens => {
+    const listaDeItens = <View>
+      {itens.map((conteudo)=>{
+
+        return <View>
+          <Text>{conteudo.postId}:{conteudo.id} - {conteudo.email}</Text>
+          <Text>{conteudo.name}</Text>
+          <Text>{conteudo.body}</Text>
+        </View> 
+      })}
+    </View>
+    setItens(listaDeItens)
+  })
+    .catch(error => { console.log("Error: ", error) })
+}
+
+return(
+  <View>
+    <Pressable onPress={() => carregarItens()}>
+      <Text>Clique abaixo para carregar várias atividades</Text>
+    </Pressable>
+    {itens}
+  </View>
+)
+}
