@@ -35,8 +35,17 @@ const estilo = StyleSheet.create({
     margin: "20px",
   },
   botao: {
-
-  }
+    borderRadius: "5px",
+    backgroundColor: "#505560",
+    padding: "10px",
+    margin: "10px",
+  },
+  dados: {
+    backgroundColor: "rgb(212, 164, 92)",
+    padding: "5px",
+    borderRadius: "5px",
+    margin: "10px",
+  },
 })
 
 export default function Atv01UmItem({}){
@@ -63,7 +72,7 @@ export default function Atv01UmItem({}){
         status = "a fazer"
       }
 
-      const usuario = <View>
+      const usuario = <View style={estilo.dados}>
         <Text> {id} - {title}: {status} </Text>
       </View>
 
@@ -78,7 +87,9 @@ export default function Atv01UmItem({}){
           Clique abaixo para carregar uma atividade
         </Text>
       </Pressable>
-      {resposta}
+      <View>
+        {resposta}
+      </View>
     </View>
   )
 }
