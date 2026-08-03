@@ -37,7 +37,7 @@ export default function Atv03TratarErrosDeUm({}){
   const estilo = StyleSheet.create({
     view: {
     borderRadius: "10px",
-    backgroundColor: "#e65ba0",
+    backgroundColor: "#e67a9a",
     padding: "10px",
     margin: "20px",
   },
