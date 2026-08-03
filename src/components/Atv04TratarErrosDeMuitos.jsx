@@ -28,3 +28,40 @@
   * Os colchetes indicam que deve se tratar de uma variável, e não
   * do texto dentro deles.
   */
+
+import { useState } from "react";
+import { Pressable, View } from "react-native";
+
+export default function Atv04TratarErrosDeMuitos({}){
+
+  const [comentariosLista, setComentariosLista] = useState(null)
+  async function comentarios(params) {
+    fetch(
+      'https://jsonplaceholder.typicode.com/comments',
+      { method: 'GET' }
+    )
+    .then((info) => {
+      if(!info.ok){
+         throw new Error(`Erro na requisição! Status: ${resposta.status}`);
+      }
+      return info.json()
+    })
+    .then((dados)=>{
+      const renderFinal = <View>
+
+      </View>
+
+      setComentariosLista(renderFinal)
+    })
+    .catch((erro)=>{
+      console.log('Erro: ', erro)
+    })
+  }
+
+  return <View>
+    <Pressable>
+      Clique abaixo para carregar uma atividade
+    </Pressable>
+    {comentariosLista}
+  </View>
+}
