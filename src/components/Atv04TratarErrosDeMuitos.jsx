@@ -30,9 +30,30 @@
   */
 
 import { useState } from "react";
-import { Pressable, View } from "react-native";
+import { Pressable, View, StyleSheet,Text } from "react-native";
 
 export default function Atv04TratarErrosDeMuitos({}){
+
+  const estilo = StyleSheet.create({
+    view: {
+    borderRadius: "10px",
+    backgroundColor: "#4d449c",
+    padding: "10px",
+    margin: "20px",
+  },
+  botao: {
+    borderRadius: "5px",
+    backgroundColor: "#505560",
+    padding: "10px",
+    margin: "10px",
+  },
+  dados: {
+    backgroundColor: "rgb(133, 195, 253)",
+    padding: "5px",
+    borderRadius: "5px",
+    margin: "10px",
+  },
+  })
 
   const [comentariosLista, setComentariosLista] = useState(null)
   async function comentarios(params) {
@@ -47,8 +68,21 @@ export default function Atv04TratarErrosDeMuitos({}){
       return info.json()
     })
     .then((dados)=>{
-      const renderFinal = <View>
+      const renderFinal = <View style = {estilo.dados}>
+        {dados.map((item) => {
+          const postId = item.postId;
+          const id = item.id;
+          const email = item.email;
+          const name = item.name;
+          const body = item.body;
 
+          return <View>
+            <Text>{postId}: {id} - {email}</Text> 
+            {'\n'} <Text>{name}</Text>
+            {'\n'} <Text>{body}</Text>
+          </View>
+          
+        })}
       </View>
 
       setComentariosLista(renderFinal)
@@ -58,8 +92,8 @@ export default function Atv04TratarErrosDeMuitos({}){
     })
   }
 
-  return <View>
-    <Pressable>
+  return <View style = {estilo.view}>
+    <Pressable onPress = {()=> comentarios()} style = {estilo.botao}>
       Clique abaixo para carregar uma atividade
     </Pressable>
     {comentariosLista}
