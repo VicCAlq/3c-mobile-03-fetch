@@ -22,3 +22,26 @@
   * O valor de "status" deve ser "feito" se completed for true, 
   * ou "a fazer" se completed for false
   */
+import {useState} from "react";
+import {View, Pressable, Text, } from "react-native";
+
+
+export default function AtvUmItem() {
+  const [atividade, setAtividade] = useState({});
+
+  function carregar( {
+      fetch(https:jsonplaceholder.typicode.com/todos/1)
+        then((resposta) => resposta.json())
+        then((dados) => setAtividade(dados));
+  })
+
+  retun (
+<view>
+ <Pressable>
+   <text>Clique abaixo para carregar uma atividade</text>
+  </Pressable>
+    {atividade.id} - {atividade.title}:{""}
+    {atividade.completed ? "feito" : "fazendu"}
+ </view>
+  );
+}
