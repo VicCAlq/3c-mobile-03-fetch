@@ -27,3 +27,43 @@
   * Os colchetes indicam que deve se tratar de uma variável, e não
   * do texto dentro deles.
   */
+import { useState } from "react";
+import { Pressable } from "react-native";
+import { View,Text } from "react-native-web";
+
+export default function Atv03TratarErrosDeUm()
+{
+  const [ativ,setAtiv] = useState()
+  async function carregarAtiv(){
+    await fetch(
+      'https://jsonplaceholder.typicode.com/comments/20', {method: 'GET',}
+    )
+    .then((objeto)=>{
+      if (!objeto.ok)
+      {
+        throw new Error(`Deu erro, Status : ${objeto.status}`);
+      }
+      return objeto.json()
+    })
+
+    .then((ativ)=> {
+      const Atividade = <View>
+        <Text>{ativ.postId}:{ativ.id}-{ativ.email}</Text>
+        <Text>{ativ.name}</Text>
+        <Text>{ativ.body}</Text>
+      </View>
+
+      setAtv(Atividade)
+    })
+    .catch(error => {console.log("Error: ", error)})
+  }
+
+  return(
+    <View>
+      <Pressable  onPress={()=>carregarAtiv()}>
+        <Text>Clique abaixo para carregar uma atividade</Text>
+      </Pressable>
+      {ativ}
+    </View>
+  )
+}
