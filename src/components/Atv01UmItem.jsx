@@ -22,3 +22,48 @@
   * O valor de "status" deve ser "feito" se completed for true, 
   * ou "a fazer" se completed for false
   */
+import { useState } from "react";
+import { Pressable, View, Text } from "react-native";
+
+export default function Atv01UmItem()
+{
+  const [Ativ,setAtiv] = useState()
+async function carregarAtiv() {
+  await fetch(' https://jsonplaceholder.typicode.com/todos/1',
+    {method:'GET',}
+  )
+   
+  .then((objeto)=> {return objeto.json()})
+  .then((Ativ)=> {console.log(Ativ)
+                 
+    let status
+    if (Ativ.completed === true)
+    {
+      status = "feito"
+    }
+    else{
+      status = "a fazer"
+    }
+                 
+    const Atividade = <View>
+      <Text> id:{Ativ.id}</Text>
+      <Text> title:{Ativ.title}</Text>
+      <Text> status:{status}</Text>
+    </View>
+    setAtv(Atividade)
+  })
+}
+
+
+  return(
+    <View>
+      <Pressable onPress={() => carregarAtiv()}>
+        <Text>
+          Clique abaixo para carregar uma atividade
+        </Text>
+      </Pressable>
+      {Atv}
+    </View>
+   
+  )
+}
