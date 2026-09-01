@@ -27,3 +27,56 @@
   * Os colchetes indicam que deve se tratar de uma variável, e não
   * do texto dentro deles.
   */
+
+import { View, Text, Pressable } from 'react-native'
+import { useState } from 'react'
+
+export default function Atv03TratarErrosDeUm() {
+
+  const [atividade, setAtividade] = useState(
+    <Text>Nenhuma atividade carregada</Text>
+  )
+
+  async function buscarAtividade() {
+
+    await fetch(
+      'https://jsonplaceholder.typicode.com/comments/20',
+      { method: 'GET' }
+    )
+    .then((resposta) => {
+
+      if (resposta.ok == false) {
+        throw new Error(`Erro na requisição! Status: ${resposta.status}`)
+      }
+
+      return resposta.json()
+    })
+    .then((dados) => {
+
+      setAtividade(
+        <View>
+          <Text>{dados.postId}: {dados.id} - {dados.email}</Text>
+          <Text>{dados.name}</Text>
+          <Text>{dados.body}</Text>
+        </View>
+      )
+    })
+    .catch((erro) => {
+      console.log("Erro: ", erro)
+    })
+  }
+
+  return (
+    <View>
+
+      <Pressable onPress={() => buscarAtividade()}>
+        <Text>
+          Clique abaixo para carregar uma atividade
+        </Text>
+      </Pressable>
+
+      {atividade}
+
+    </View>
+  )
+}
