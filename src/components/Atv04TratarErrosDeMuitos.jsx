@@ -34,11 +34,11 @@ import { useState } from 'react'
 
 export default function Atv04TratarErrosDeMuitos() {
 
-  const [resultado, setResultado] = useState(
-    <Text>A atividade vai aparecer aqui atividade</Text>
+  const [atividade, setAtividade] = useState(
+    <Text>Nenhuma atividade carregada</Text>
   )
 
-  async function carregar() {
+  async function buscarAtividades() {
 
     await fetch(
       'https://jsonplaceholder.typicode.com/comments',
@@ -54,18 +54,18 @@ export default function Atv04TratarErrosDeMuitos() {
     })
     .then((dados) => {
 
-      const lista = dados.map((atividade) => {
+      const lista = dados.map((resultado) => {
 
         return (
-          <View key={atividade.id}>
-            <Text>{atividade.postId}: {atividade.id} - {atividade.email}</Text>
-            <Text>{atividade.name}</Text>
-            <Text>{atividade.body}</Text>
+          <View key={resultado.id}>
+            <Text>{resultado.postId}: {resultado.id} - {resultado.email}</Text>
+            <Text>{resultado.name}</Text>
+            <Text>{resultado.body}</Text>
           </View>
         )
       })
 
-      setResultado(
+      setAtividade(
         <View>
           {lista}
         </View>
@@ -79,11 +79,13 @@ export default function Atv04TratarErrosDeMuitos() {
   return (
     <View>
 
-      <Pressable onPress={() => carregar()}>
-        <Text>Clique abaixo para carregar uma atividade</Text>
+      <Pressable onPress={() => buscarAtividades()}>
+        <Text>
+          Clique abaixo para carregar uma atividade
+        </Text>
       </Pressable>
 
-      {resultado}
+      {atividade}
 
     </View>
   )
