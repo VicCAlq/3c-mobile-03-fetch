@@ -30,8 +30,8 @@ import { useState } from 'react'
 
 export default function Atv02MuitosItens() {
 
-   const [resultado, setResultado] = useState(
-   <Text>A atividade aparecerá aqui</Text>
+  const [resultado, setResultado] = useState(
+    <Text>A atividade aparecerá aqui</Text>
   )
 
   async function carregarAtividades() {
@@ -54,7 +54,7 @@ export default function Atv02MuitosItens() {
         }
 
         return (
-          <Text key={atividade.id}>
+          <Text key={resultado.id}>
             {resultado.id} - {resultado.title}: {status}
           </Text>
         )
@@ -72,8 +72,8 @@ export default function Atv02MuitosItens() {
     <View>
 
       <Pressable onPress={() => carregarAtividades()}>
-       <Text>
-          Clique abaixo para carregar uma atividade
+        <Text>
+          Clique abaixo para carregar várias atividades
         </Text>
       </Pressable>
 
@@ -82,3 +82,5 @@ export default function Atv02MuitosItens() {
     </View>
   )
 }
+
+
