@@ -27,3 +27,41 @@
   * Os colchetes indicam que deve se tratar de uma variável, e não
   * do texto dentro deles.
   */
+
+import React, {useState} from "react";
+import { View, Text,Pressable} from "react-native";
+ 
+export default function  Atv03MuitosItens() {
+  cosnt [atividades, setAtividades] = useStates<any>();
+  
+   funcion carregarAtividade(){
+    fetch("https://jsonplaceholder.typicode.com/comments/20")
+      .then(resposta => {
+        if (!respsota.ok) {
+          throw new Error("erro na requisição");
+   }
+    retun resposta.json();
+  })
+    .then(dados => {
+     setAtividade(dados);
+    })
+    .catch(erro => {
+      console.log(erro);
+    });
+ }
+
+ retun ( 
+  <View>
+    <Pressable onPress={carregarAtividade}>
+      <Text>clique abaixo para carregar várias atividades</Text>
+      </Pressable>
+      <View>
+        {atividade.map(atividade => (
+          <Text key={atividade.id}>
+            {atividade.completed ? "feito" : "a fazer"}
+            </Text>
+        ))}
+      </View>
+      </View>
+   );
+  }
